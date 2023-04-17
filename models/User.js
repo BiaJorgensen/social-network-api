@@ -29,10 +29,19 @@ const userSchema = new Schema(
                 ref: 'User'
             }
           ]
+    },
+    {
+        toJSON: {virtuals: true},
+        id: false,
     }
 );
 
 // Virtual property that returns # of user's friends
 userSchema.virtual('friendCount').get(function () {
         return this.friends.length
-    })
+    });
+
+// Initialize User model
+const User = model('user', userSchema);
+
+module.exports = User

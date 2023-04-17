@@ -20,6 +20,10 @@ const thoughtSchema = new Schema(
         },
         // Array of nested documents created with the reactionSchema
         reactions: [Reaction]
+    },
+    {
+        toJSON: {virtuals: true},
+        id: false,
     }
 );
 
@@ -36,4 +40,9 @@ function formateDate (createdAt) {
 // Virtual property that returns # of user's friends
 thoughtSchema.virtual('reactionCount').get(function () {
     return this.reactions.length
-})
+});
+
+// Initialize Thought model
+const Thought = model('thought', thoughtSchema);
+
+module.exports = Thought
