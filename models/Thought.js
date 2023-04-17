@@ -12,7 +12,7 @@ const thoughtSchema = new Schema(
         createdAt: {
             type: Date,
             default: Date.now,
-            get: formateDate
+            get: formatDate
         },
         username: {
             type: String,
@@ -27,7 +27,7 @@ const thoughtSchema = new Schema(
     }
 );
 
-function formateDate (createdAt) {
+function formatDate (createdAt) {
     const date = new Date(createdAt);
     const month = date.toLocaleString('default', { month: 'short' });
     const day = date.getDate();
