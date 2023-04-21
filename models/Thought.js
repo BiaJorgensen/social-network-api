@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
-const reactionSchema = require('./Reaction')
+const reactionSchema = require('./Reaction');
+const dayjs = require('dayjs');
 
 const thoughtSchema = new Schema(
     {
@@ -22,20 +23,17 @@ const thoughtSchema = new Schema(
         reactions: [reactionSchema]
     },
     {
-        toJSON: {virtuals: true},
-        id: false,
+        toJSON: {
+            virtuals: true,
+            id: false,
+            getters: true
+        }
     }
 );
 
 function formatDate (createdAt) {
-    const date = new Date(createdAt);
-    const month = date.toLocaleString('default', { month: 'short' });
-    const day = date.getDate();
-    const year = date.getFullYear();
-    const time = date.toLocaleTimeString()
-    console.log(`${month} ${day}, ${year} at ${time}`);
-    return `${month} ${day}, ${year} at ${time}`
-};
+    return dayjs(createdAt).format('MMMM DD, YYYY [at] hh:mm A');
+}
 
 // Virtual property that returns # of user's friends
 thoughtSchema.virtual('reactionCount').get(function () {
