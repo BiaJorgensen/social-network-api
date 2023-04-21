@@ -1,4 +1,5 @@
-const { Schema, model } = require('mongoose');
+const { Schema, Types } = require('mongoose');
+const dayjs = require('dayjs');
 
 const reactionSchema = new Schema(
     {
@@ -28,13 +29,7 @@ const reactionSchema = new Schema(
 );
 
 function formatDate (createdAt) {
-    const date = new Date(createdAt);
-    const month = date.toLocaleString('default', { month: 'short' });
-    const day = date.getDate();
-    const year = date.getFullYear();
-    const time = date.toLocaleTimeString()
-    console.log(`${month} ${day}, ${year} at ${time}`);
-    return `${month} ${day}, ${year} at ${time}`
-};
+    return dayjs(createdAt).format('MMMM DD, YYYY [at] hh:mm A');
+}
 
 module.exports = reactionSchema
