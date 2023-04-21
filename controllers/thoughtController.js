@@ -23,31 +23,31 @@ module.exports = {
         Thought.create(req.body)
         .then((thoughtData) => {
             // Add new thought ID to User
-            return User.findOneAndUpdate({ _id: req.body.userId }, 
+            return User.findOneAndUpdate({ username: req.body.username }, 
                 { $push: { thoughts: thoughtData._id} }, 
                 { runValidators: true, new: true })
             })
-        .then(() => res.json(thoughtData))
-        .catch((err) => res.status(500).json(err))
+        .then((thoughtData) => res.json(thoughtData))
+        .catch((err) => res.status(500).json(err.message))
     },
 
     // Update thoguht by its ID according to info provided in Body, using $set so only values in body are updated
     updateThought(req, res) {
-        Thought.findOneAndUpdate({ _id: req.params.thoghtId }, { $set: req.body }, { runValidators: true, new: true })
+        Thought.findOneAndUpdate({ _id: req.params.thoughtId }, { $set: req.body }, { runValidators: true, new: true })
         .then((thought) => thought ? res.json(thought) : res.status(404).json({ message: 'No thought found with that ID' }))
         .catch((err) => res.status(500).json(err))
     },
 
     // Delete thought according to its ID in the search params
     deleteThought(req, res) {
-        Thought.findOneAndDelete({ _id: req.params.thoghtId })
+        Thought.findOneAndDelete({ _id: req.params.thoughtId })
         .then((thought) => thought ? res.json({ message: 'Thought has been deleted'}) : res.status(404).json({ message: 'No thought found with that ID' }))
         .catch((err) => res.status(500).json(err))
     },
 
     // Add a new reaction to a thought
     addReaction(req, res) {
-        Thought.findOneAndUpdate({ _id: req.params.thoughtId }, { $addToset: { reactions: req.body} }, { runValidators: true, new: true })
+        Thought.findOneAndUpdate({ _id: req.params.thoughtId }, { $addToSet: { reactions: req.body} }, { runValidators: true, new: true })
         .then((thought) => thought ? res.json(thought) : res.status(404).json({ message: 'No thought found with that ID, reaction cannot be added' }))
         .catch((err) => res.status(500).json(err))
     },
