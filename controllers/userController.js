@@ -9,10 +9,10 @@ module.exports = {
         .populate({ path: 'thoughts'})
         .then((users) => res.json(users))
         .catch((err) => res.status(500).json(err));
-      },
+    },
 
-    //   Get one User by its ID
-      getOneUser(req, res) {
+    // Get one User by its ID
+    getOneUser(req, res) {
         // Use paremeter (the ID in this case) on search bar to find one user
         User.findOne({ _id: req.params.userId})
         .populate({ path: 'friends'})
@@ -20,9 +20,9 @@ module.exports = {
         .then((user) =>
         user ? res.json(user) : res.status(404).json({ message: 'No user found with that ID' }) 
         ).catch((err) => res.status(500).json(err));
-      },
+    },
 
-    //   Create new User
+    // Create new User
     createNewUser(req, res) {
         User.create(req.body)
         .then((userData) => res.json(userData))
