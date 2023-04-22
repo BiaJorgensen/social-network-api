@@ -33,8 +33,8 @@ To use this Application Programming Interface, follow these steps:
         * **PUT** `http://127.0.0.1:3001/api/users{:userId}` (to update one user)
             * In Body JSON (you don't have to update both username and email):<br>
             {<br> 
-                &emsp; "username" : "_new user name_",<br>
-                &emsp; "email": "_new user email_"<br>
+                &emsp; "username" : "_updated user name_",<br>
+                &emsp; "email": "_updated user email_"<br>
             } 
         * **DELETE** `http://127.0.0.1:3001/api/users{:userId}` (to delete one user)
         <br><br>
@@ -58,8 +58,8 @@ To use this Application Programming Interface, follow these steps:
         * **PUT** `http://127.0.0.1:3001/api/thoughts/{:thoughtId}` (to update one thought)
              * In Body JSON (you don't have to update both thoughtText and username):<br/>
             {<br> 
-                &emsp; "thoughtText" : "_new thought_",<br>
-                &emsp; "username": "_user that is adding the new thought_"<br>
+                &emsp; "thoughtText" : "_updated thought_",<br>
+                &emsp; "username": "_user that is updating the thought_"<br>
             } 
         * **DELETE** `http://127.0.0.1:3001/api/thoughts/{:thoughtId}` (to delete one thought)
         <br><br>
